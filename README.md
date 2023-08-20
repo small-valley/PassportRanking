@@ -1,6 +1,6 @@
 # Passport Ranking Visualizer
 
-<img src="./img/Screenshot.png" alt="Screenshot" width="100%" height="550"/>
+<img src="./img/Screenshot.png" alt="Screenshot" width="100%"/>
 
 This project visualizes passport ranking data on map.  
 By selecting contry1 and country2, you can see which country passport holder from each selected country can go without visa.
