@@ -8,7 +8,15 @@ function CountrySelector(props) {
 
   return (
     <div>
-      <select name="country" placeholder="country" onChange={handleClick}>
+      <label for={props.index}>Country{props.index}</label>
+      <select
+        id={props.index}
+        class="country-select-box"
+        name="country"
+        placeholder="country"
+        onChange={handleClick}
+      >
+        <option key="-1">Select Country</option>
         {optionCreator()}
       </select>
     </div>

@@ -1,0 +1,41 @@
+h1 {
+    text-align: center;
+}
+
+div.country-selector-container {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+div.country-selector {
+    display: flex;
+}
+
+.country-select-box {
+    height: 100%;
+}
+
+label {
+    margin-right: 0.5rem;
+}
+
+@media (max-width: 750px) {
+    h1 {
+        margin-bottom: 0;
+    }
+
+    div.country-selector-container {
+        margin-top: 0;
+    }
+
+    div.country-selector {
+        flex-direction: column;
+        height: 100px;
+    }
+
+    .country-select-box {
+        height: 25px;
+        width: 100%;
+    }
+}
