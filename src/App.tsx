@@ -8,7 +8,7 @@ import CountrySelector from "./CountrySelector";
 import ColorSelector from "./ColorSelector";
 
 let scale = ["#ff9f1c", "#2ec4b6", "#9a031e"];
-let mapData = {};
+let mapData: {[key: string]: number} = {};
 let mapData1 = {};
 let mapData2 = {};
 let country1 = "";
@@ -19,14 +19,14 @@ const countryBothColor = 3;
 
 const countryData = require("./data/data.json");
 
-const handleClick = (e, countryCode) => {
+const handleClick = (e: any, countryCode: string) => {
   console.log(countryCode);
 };
 
-const createMapData = (data, index) => {
+const createMapData = (data: any, index: number) => {
   mapData = {};
   if (data !== undefined) {
-    data.default.forEach((country, i) => {
+    data.default.forEach((country: any, i: number) => {
       if (country.pivot.is_visa_free === 1) {
         mapData[country.code] = index === 1 ? country1Color : country2Color;
       }
@@ -55,20 +55,20 @@ const createMapData = (data, index) => {
   return result;
 };
 
-const setColor = (color, index) => {
+const setColor = (color: string, index: number) => {
   scale[index] = color;
 };
 
 function App() {
   const [mapData, changeMapData] = useState({});
 
-  const handleChildEvent = (eventData, index) => {
+  const handleChildEvent = (eventData: any, index: number) => {
     country1 = index === 1 ? eventData : country1;
     country2 = index === 2 ? eventData : country2;
     changeMapData(createMapData(countryData[eventData], index));
   };
 
-  const handleChildColorChangeEvent = (eventData, index) => {
+  const handleChildColorChangeEvent = (eventData: any, index: number) => {
     setColor(eventData, index);
     const country = index === 1 ? country1 : country2;
     changeMapData(createMapData(countryData[country], index));
@@ -95,14 +95,14 @@ function App() {
             "stroke-width": 0,
             "stroke-opacity": 0,
           },
-          // hover: {
-          //   "fill-opacity": 0.8,
-          //   cursor: "pointer",
-          // },
-          // selected: {
-          //   fill: "#2938bc", //color for the clicked country
-          // },
-          // selectedHover: {},
+          hover: {
+            "fill-opacity": 0.8,
+            cursor: "pointer",
+          },
+          selected: {
+            fill: "#e4e4e4", //color for the clicked country
+          },
+          selectedHover: {},
         }}
         regionsSelectable={true}
         series={{
@@ -115,24 +115,20 @@ function App() {
           ],
         }}
       />
-      <div class="country-selector-container">
-        <div class="country-selector">
-          <CountrySelector onChildEvent={handleChildEvent} index={1} />
-          <ColorSelector
-            onChildEvent={handleChildColorChangeEvent}
-            index={0}
-            defaultColor={scale[0]}
-          />
-        </div>
-        <div class="country-selector">
-          <CountrySelector onChildEvent={handleChildEvent} index={2} />
-          <ColorSelector
-            onChildEvent={handleChildColorChangeEvent}
-            index={1}
-            defaultColor={scale[1]}
-          />
-        </div>
-        <div class="country-selector">
+      <div className="country-selector-container">
+        {
+          [0, 1].map((i) => {
+            return <div className="country-selector" key={i}>
+            <CountrySelector onChildEvent={handleChildEvent} index={i + 1} />
+            <ColorSelector
+              onChildEvent={handleChildColorChangeEvent}
+              index={i}
+              defaultColor={scale[i]}
+            />
+          </div>
+          })
+        }
+        <div className="country-selector">
           <ColorSelector
             onChildEvent={handleChildColorChangeEvent}
             index={2}

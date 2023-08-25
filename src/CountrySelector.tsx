@@ -1,17 +1,22 @@
 import React from "react";
 
-function CountrySelector(props) {
-  const handleClick = (e) => {
+type Props = {
+  onChildEvent: any,
+  index: number,
+}
+
+function CountrySelector(props: Props) {
+  const handleClick = (e: any) => {
     // Call the callback function passed from the parent
     props.onChildEvent(e.target.value, props.index);
   };
 
   return (
     <div>
-      <label for={props.index}>Country{props.index}</label>
+      <label htmlFor={`${props.index}`}>Country{props.index}</label>
       <select
-        id={props.index}
-        class="country-select-box"
+        id={`${props.index}`}
+        className="country-select-box"
         name="country"
         placeholder="country"
         onChange={handleClick}
@@ -25,7 +30,7 @@ function CountrySelector(props) {
 
 function optionCreator() {
   const countryData = require("./data/coutries.json");
-  return countryData.map((country, index) => {
+  return countryData.map((country: any, index: number) => {
     return (
       <option key={index} value={index}>
         {country}
